@@ -3,11 +3,24 @@ About birka-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/birka-feedstock/blob/main/LICENSE.txt)
 
+
+About birka
+-----------
+
 Home: https://github.com/BIIFSweden/birka
 
 Package license: GPL-3.0-only
 
-Summary: A tool for bioimage data validation and archival
+Summary: a tool for bioimage data validation and archival
+
+About birka-menu
+----------------
+
+Home: https://github.com/BIIFSweden/birka
+
+Package license: GPL-3.0-only
+
+Summary: menu icons for birka
 
 Current build status
 ====================
@@ -28,6 +41,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-birka-green.svg)](https://anaconda.org/conda-forge/birka) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/birka.svg)](https://anaconda.org/conda-forge/birka) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/birka.svg)](https://anaconda.org/conda-forge/birka) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/birka.svg)](https://anaconda.org/conda-forge/birka) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-birka--menu-green.svg)](https://anaconda.org/conda-forge/birka-menu) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/birka-menu.svg)](https://anaconda.org/conda-forge/birka-menu) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/birka-menu.svg)](https://anaconda.org/conda-forge/birka-menu) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/birka-menu.svg)](https://anaconda.org/conda-forge/birka-menu) |
 
 Installing birka
 ================
@@ -39,16 +53,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `birka` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `birka, birka-menu` can be installed with `conda`:
 
 ```
-conda install birka
+conda install birka birka-menu
 ```
 
 or with `mamba`:
 
 ```
-mamba install birka
+mamba install birka birka-menu
 ```
 
 It is possible to list all of the versions of `birka` available on your platform with `conda`:
