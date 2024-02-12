@@ -11,7 +11,7 @@ Home: https://github.com/BIIFSweden/birka
 
 Package license: GPL-3.0-only
 
-Summary: a tool for bioimage data validation and archival
+Summary: A tool for bioimage data validation and archival
 
 About birka-menu
 ----------------
@@ -20,7 +20,7 @@ Home: https://github.com/BIIFSweden/birka
 
 Package license: GPL-3.0-only
 
-Summary: menu icons for birka
+Summary: Menu icons for Birka
 
 Current build status
 ====================
