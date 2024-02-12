@@ -1,50 +1,90 @@
 {% set name = "birka" %}
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: birka-meta
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/birka-{{ version }}.tar.gz
-  sha256: 46c71fe05742374af0ecd2531b284c9f1ce01e198a9725d81749169d270b3ec2
+  - url: https://pypi.io/packages/source/b/birka/birka-{{ version }}.tar.gz
+    sha256: d10d57232a3ab71d3dfa763a626d33501aad19b91af0d8dfa333607155cec074
+  - url: https://raw.githubusercontent.com/BIIFSweden/birka/v{{ version }}/resources/conda_menu_config.json
+    folder: resources
+    sha256: c6c8606151a2de66443b4ae9a098aef9af962f6314006e9e5826c2e9760d0c2a
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  entry_points:
-    - birka = birka:main
   number: 0
 
-requirements:
-  host:
-    - python >=3.10,<3.12
-    - setuptools >=64
-    - setuptools-scm >=8
-    - pip
-  run:
-    - python >=3.10,<3.12
-    - aicsimageio
-    - pandas
-    - qtpy
-  run_constrained:
-    - lxml <5
-
-test:
-  imports:
-    - birka
-  commands:
-    - pip check
-  requires:
-    - pip
-    - pyside6
+outputs:
+  - name: birka
+    version: {{ version }}
+    build:
+      noarch: python
+      script: PYTHONDONTWRITEBYTECODE=1 PIP_NO_INDEX=1 PIP_IGNORE_INSTALLED=1 {{ PREFIX }}/bin/python -m pip install -vv --no-deps --no-build-isolation .
+      entry_points:
+        - birka = birka.__main__:main
+    requirements:
+      build:
+        - python >=3.10,<3.12
+        - python-build
+        - setuptools >=64
+        - setuptools-scm >=8
+      host:
+        - python >=3.10,<3.12
+        - pip
+        - setuptools >=64
+        - setuptools-scm >=8
+      run:
+        - python >=3.10,<3.12
+        - aicsimageio
+        - pandas
+        - qtpy
+      run_constrained:
+        - lxml <5
+    test:
+      requires:
+        - pip
+        - pyside6
+      imports:
+        - birka
+      commands:
+        - pip check
+    about:
+      home: https://github.com/BIIFSweden/birka
+      summary: a tool for bioimage data validation and archival
+      license: GPL-3.0-only
+      license_file: LICENSE
+  - name: birka-menu
+    version: {{ version }}
+    build:
+      noarch: python
+      script:
+        - mkdir -p "${PREFIX}/Menu"
+        - sed "s/__PKG_VERSION__/{{ PKG_VERSION }}/" "{{ SRC_DIR }}/resources/conda_menu_config.json" > "{{ PREFIX }}/Menu/birka-menu.json"
+    requirements:
+      build:
+        - sed  # [unix]
+      run:
+        - birka {{ version }}.*
+    test:
+      requires:
+        - pyside6
+      imports:
+        - birka
+      commands:
+        - test -f "${CONDA_PREFIX}/Menu/birka-menu.json"
+    about:
+      home: https://github.com/BIIFSweden/birka
+      summary: menu icons for birka
+      license: GPL-3.0-only
+      license_file: LICENSE
 
 about:
   home: https://github.com/BIIFSweden/birka
-  summary: A tool for bioimage data validation and archival
+  summary: a tool for bioimage data validation and archival
   license: GPL-3.0-only
   license_file: LICENSE
 
 extra:
+  feedstock-name: birka
   recipe-maintainers:
     - jwindhager
