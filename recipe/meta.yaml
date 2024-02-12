@@ -1,5 +1,5 @@
 {% set name = "birka" %}
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/birka-{{ version }}.tar.gz
-  sha256: 46c71fe05742374af0ecd2531b284c9f1ce01e198a9725d81749169d270b3ec2
+  sha256: d10d57232a3ab71d3dfa763a626d33501aad19b91af0d8dfa333607155cec074
 
 build:
   noarch: python
